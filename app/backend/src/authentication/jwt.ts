@@ -14,13 +14,15 @@ const createToken = (userWithoutPassword: IUserJwt) => {
   return token;
 };
 
-const verifyToken = (authorization: string) => {
-  try {
-    const payload = jwt.verify(authorization, secret);
-    return payload;
-  } catch (error) {
-    return { isError: true, error };
-  }
-};
+// const verifyToken = (authorization: string) => {
+//   try {
+//     const payload = jwt.verify(authorization, secret);
+
+//     return payload;
+//   } catch (error) {
+//     return { isError: true, error };
+//   }
+// };
+const verifyToken = (authorization: string) => authorization;
 
 export { createToken, verifyToken };

@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import TemController from '../controllers/TemController';
+import TeamController from '../controllers/TeamController';
 
 const router = Router();
 
-router.get('/', TemController.getAll);
+router.get('/', TeamController.getAll);
+router.get('/:id', TeamController.getById);
 
 export default router;

@@ -1,5 +1,6 @@
 import * as express from 'express';
 import UserRoute from './routes/UserRoute';
+import TeamRoute from './routes/TeamRoute';
 
 class App {
   public app: express.Express;
@@ -16,6 +17,7 @@ class App {
 
   private routes(): void {
     this.app.use('/login', UserRoute);
+    this.app.use('/teams', TeamRoute);
   }
 
   private config():void {

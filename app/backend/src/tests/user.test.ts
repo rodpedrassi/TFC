@@ -25,7 +25,7 @@ describe('Testes da rota post /login', () => {
   })
   
   it('Checa se retorna um token em caso de SUCESSO com status 200', async function () {
-    sinon.stub(User, 'findOne').resolves(UserMock.user as User);
+    sinon.stub(User, 'findOne').resolves({dataValues: UserMock.user} as User);
     sinon.stub(bcrypt, 'compareSync').returns(true);
     sinon.stub(jwt, 'createToken').returns(UserMock.token);
     
@@ -35,7 +35,7 @@ describe('Testes da rota post /login', () => {
       .send(UserMock.login);
 
     expect(chaiHttpResponse.status).to.equal(200);
-    expect(chaiHttpResponse.body.token).to.equal({token: UserMock.token});
+    expect(chaiHttpResponse.body.token).to.equal(UserMock.token);
   });
 
   it('Checa se retorna "All fields must be filled" ao enviar uma requisição sem password', async () => {

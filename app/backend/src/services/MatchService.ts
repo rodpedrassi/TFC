@@ -25,9 +25,26 @@ export default class MatchService {
     return allMatchesInProgress;
   }
 
+  static async getById(id: number) {
+    const team = await Team.findByPk(id);
+    return team;
+  }
+
   static async create(match: CreateMatch) {
+    const { awayTeamId, homeTeamId } = match;
+
+    const team1 = MatchService.getById(homeTeamId);
+    const team2 = MatchService.getById(awayTeamId);
+    if (!team1 || !team2) return { type: 'Not Found', message: 'There is no team with such id!' };
+
+    if (awayTeamId === homeTeamId) {
+      return {
+        type: 'Equal Teams',
+        message: 'It is not possible to create a match with two equal teams',
+      };
+    }
     const newMatch = await MatchModel.create({ ...match, inProgress: true });
-    return newMatch;
+    return { message: newMatch };
   }
 
   static async updateProgress(matchId: number) {

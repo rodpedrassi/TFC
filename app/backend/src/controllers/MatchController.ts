@@ -20,8 +20,10 @@ export default class MatchController {
   }
 
   static async create(req: Request, res: Response) {
-    const newMatch = await MatchService.create(req.body);
-    return res.status(201).json(newMatch);
+    const { type, message } = await MatchService.create(req.body);
+    if (type === 'Not Found') return res.status(404).json({ message });
+    if (type === 'Equal Teams') return res.status(422).json({ message });
+    return res.status(201).json(message);
   }
 
   static async updateProgress(req: Request, res: Response) {

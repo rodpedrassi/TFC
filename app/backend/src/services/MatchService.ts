@@ -1,6 +1,7 @@
 // import sequelize = require('sequelize');
 import Team from '../database/models/TeamModel';
 import MatchModel from '../database/models/MatchModel';
+import { CreateMatch } from './interfaces/IMatch';
 
 // const { Op } = sequelize;
 
@@ -22,5 +23,10 @@ export default class MatchService {
         { model: Team, as: 'awayTeam', attributes: { exclude: ['id'] } },
       ] });
     return allMatchesInProgress;
+  }
+
+  static async create(match: CreateMatch) {
+    const newMatch = await MatchModel.create({ ...match, inProgress: true });
+    return newMatch;
   }
 }

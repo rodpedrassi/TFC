@@ -31,4 +31,11 @@ export default class MatchController {
     const { message } = await MatchService.updateProgress(Number(id));
     return res.status(200).json({ message });
   }
+
+  static async updateGoals(req: Request, res: Response) {
+    const { id } = req.params;
+    const { type, message } = await MatchService.updateGoals(Number(id), req.body);
+    if (type) { return res.status(404).json({ message }); }
+    return res.status(200).json({ message });
+  }
 }

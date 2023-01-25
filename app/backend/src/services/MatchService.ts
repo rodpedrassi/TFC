@@ -1,7 +1,7 @@
 // import sequelize = require('sequelize');
 import Team from '../database/models/TeamModel';
 import MatchModel from '../database/models/MatchModel';
-import { CreateMatch } from './interfaces/IMatch';
+import { CreateMatch, EditGoals } from './interfaces/IMatch';
 import TeamService from './TeamService';
 
 // const { Op } = sequelize;
@@ -28,10 +28,8 @@ export default class MatchService {
 
   static async create(match: CreateMatch) {
     const { awayTeamId, homeTeamId } = match;
-    console.log(homeTeamId, typeof homeTeamId);
 
     const team1 = await TeamService.getById(homeTeamId);
-    console.log('pau', team1);
     const team2 = await TeamService.getById(awayTeamId);
     if (!team1.message || !team2.message) {
       return { type: 'Not Found', message: 'There is no team with such id!' };
@@ -43,6 +41,7 @@ export default class MatchService {
         message: 'It is not possible to create a match with two equal teams',
       };
     }
+
     const newMatch = await MatchModel.create({ ...match, inProgress: true });
     return { message: newMatch };
   }
@@ -54,6 +53,16 @@ export default class MatchService {
       },
     });
     if (affectedRows > 0) return { message: 'Finished' };
+    return { type: 'Not Found', message: 'Match not Found' };
+  }
+
+  static async updateGoals(matchId: number, HomeAwayGoals: EditGoals) {
+    const [affectedRows] = await MatchModel.update({ ...HomeAwayGoals }, {
+      where: {
+        id: matchId,
+      },
+    });
+    if (affectedRows > 0) return { type: null, message: 'Score updated successfully' };
     return { type: 'Not Found', message: 'Match not Found' };
   }
 }

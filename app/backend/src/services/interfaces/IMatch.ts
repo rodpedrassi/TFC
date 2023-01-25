@@ -4,3 +4,8 @@ export interface CreateMatch {
   homeTeamGoals: number;
   awayTeamGoals: number;
 }
+
+export interface EditGoals {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+}

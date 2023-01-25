@@ -2,6 +2,7 @@
 import Team from '../database/models/TeamModel';
 import MatchModel from '../database/models/MatchModel';
 import { CreateMatch } from './interfaces/IMatch';
+import TeamService from './TeamService';
 
 // const { Op } = sequelize;
 
@@ -25,17 +26,16 @@ export default class MatchService {
     return allMatchesInProgress;
   }
 
-  static async getById(id: number) {
-    const team = await Team.findByPk(id);
-    return team;
-  }
-
   static async create(match: CreateMatch) {
     const { awayTeamId, homeTeamId } = match;
+    console.log(homeTeamId, typeof homeTeamId);
 
-    const team1 = MatchService.getById(homeTeamId);
-    const team2 = MatchService.getById(awayTeamId);
-    if (!team1 || !team2) return { type: 'Not Found', message: 'There is no team with such id!' };
+    const team1 = await TeamService.getById(homeTeamId);
+    console.log('pau', team1);
+    const team2 = await TeamService.getById(awayTeamId);
+    if (!team1.message || !team2.message) {
+      return { type: 'Not Found', message: 'There is no team with such id!' };
+    }
 
     if (awayTeamId === homeTeamId) {
       return {

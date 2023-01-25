@@ -29,4 +29,14 @@ export default class MatchService {
     const newMatch = await MatchModel.create({ ...match, inProgress: true });
     return newMatch;
   }
+
+  static async updateProgress(matchId: number) {
+    const [affectedRows] = await MatchModel.update({ inProgress: false }, {
+      where: {
+        id: matchId,
+      },
+    });
+    if (affectedRows > 0) return { message: 'Finished' };
+    return { type: 'Not Found', message: 'Match not Found' };
+  }
 }

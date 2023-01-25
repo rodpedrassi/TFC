@@ -7,5 +7,6 @@ const router = Router();
 // router.get('/?', MatchController.getMatchesInProgress);
 router.get('/', MatchController.getAll);
 router.post('/', jwtValidate, MatchController.create);
+router.patch('/:id/finish', MatchController.updateProgress);
 
 export default router;

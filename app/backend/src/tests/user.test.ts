@@ -130,6 +130,6 @@ describe('Testes da rota get login/validate', () => {
       .set('Authorization', 'tokenErrado');
       
     expect(chaiHttpResponse.status).to.equal(401);
-    expect(chaiHttpResponse.body.message).to.equal('Expired or invalid token');
+    expect(chaiHttpResponse.body.message).to.equal('Token must be a valid token');
   });
 });

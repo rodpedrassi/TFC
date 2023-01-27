@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import UserService from '../services/UserService';
 
 export default class UserController {
-  constructor(private userService = new UserService()) { }
+  // constructor(private userService = new UserService()) { }
 
   static async login(req: Request, res: Response) {
     const { message, type } = await UserService.login(req.body);

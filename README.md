@@ -1,13 +1,28 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Trybe Futebol Club
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+---
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+## Descrição 📜
+
+O TFC é um site informativo sobre partidas e classificações de futebol! ⚽️.
+
+Feito com:
+
+- [Typescript](https://www.typescriptlang.org/)
+- [Node.js](https://nodejs.org/en/)
+- [Express.js](https://expressjs.com/)
+- [MySQL](https://www.mysql.com/)
+- [JWT](https://jwt.io/)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+---
+
+## Features 📋
+
+- [x] Sistema de login, com cadastro
+- [x] Authenticação com JWT
+- [x] CRUD times
+- [x] CRUD partidas
+
+---
